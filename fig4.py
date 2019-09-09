@@ -94,7 +94,7 @@ mk3llgmdust_d15org_corz = np.ma.average(mk3llgmdust_d15org_cor, axis=0, weights=
 
 #%% collect prepared compilation of sedimentary d15N records
 
-df = pd.read_csv('metadata_for_cores.csv')
+df = pd.read_csv('Supplementary Data 1.csv')
 print(df)
 
 records = df[~np.isnan(df['d15n_LateH'])]
