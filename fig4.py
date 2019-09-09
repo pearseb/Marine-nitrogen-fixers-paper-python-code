@@ -138,10 +138,10 @@ p3 = plt.contourf(lonproj, latproj, mk3lpidust_d15org_corz-mk3lpi_d15org_corz, c
 c3 = plt.contour(lonproj, latproj, mk3lpidust_d15org_corz-mk3lpi_d15org_corz, colors='black', levels=conts, alpha=0.8, linewidths=0.5, linestyle='-')
 s31 = plt.scatter(bound_x, bound_y, s=150, c=bound_records['d15n_LGM']-bound_records['d15n_LateH'], \
                  marker='*', vmin=np.ma.min(levs), vmax=np.ma.max(levs), cmap=cmo.balance, \
-                 alpha=0.75, edgecolor='k', linewidths=1.0, zorder=2)
+                 alpha=0.75, edgecolor='k', linewidths=1.0, zorder=3)
 s32 = plt.scatter(bulk_x, bulk_y, s=40, c=bulk_records['d15n_LGM']-bulk_records['d15n_LateH'], \
                  marker='o', vmin=np.ma.min(levs), vmax=np.ma.max(levs), cmap=cmo.balance, \
-                 alpha=0.5, edgecolor='k', linewidths=1.0, zorder=2)
+                 alpha=0.75, edgecolor='k', linewidths=1.0, zorder=2)
 
 proj.drawparallels(range(domain_draw[0],domain_draw[2]+1,dlat), labels=[True,False,False,False], color=(.3,.3,.3), linewidth=0, fontsize=12, family='sans-serif')
 proj.drawmeridians(range(domain_draw[1],domain_draw[3]+1,dlon), labels=[True,False,False,True], color=(.3,.3,.3), linewidth=0, fontsize=12)
@@ -157,6 +157,8 @@ plt.subplots_adjust(bottom=0.1, top=0.95, left=0.075, right=0.85)
 cbax = fig.add_axes([0.88, 0.25, 0.03, 0.55])
 cbar = plt.colorbar(p3, cax=cbax, orientation='vertical')
 cbar.ax.set_ylabel(u'$\delta^{15}$N ‰ vs air', fontsize=12, family='sans-serif')
+
+plt.clabel(c3, manual=True, fmt='%i', fontsize=10, colors='k', inline=True)
 
 
 fig.savefig('figures_for_publication/fig4.pdf',dpi=300,bbox_inches='tight')

@@ -183,6 +183,20 @@ bioT_def = np.array(dicT_def)-abio
 
 
 
+#%% source data (fig 3a)
+
+print(sfe_stat,bioT_stat,spo4_stat)
+print(sfe_cp0,bioT_cp0, spo4_cp0)
+print(sfe_cp165,bioT_cp165, spo4_cp165)
+print(sfe_plim,bioT_plim, spo4_plim)
+print(sfe_def,bioT_def, spo4_def)
+
+print(fixT_cp0)
+print(fixT_cp165)
+print(fixT_plim)
+print(fixT_def)
+
+
 #%% figure for paper
 
 fig = plt.figure(facecolor='w', figsize=(14,6))

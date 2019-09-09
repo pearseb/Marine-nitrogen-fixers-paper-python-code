@@ -90,6 +90,12 @@ fixT = np.array(fixT)
 pco2 = np.array(pco2)
 sfe = np.array(sfe)
 
+# for source data file
+print(fixT[0:7], sfe[0:7], pco2[0:7])  # GFDL
+print(fixT[7:14], sfe[7:14], pco2[7:14])  # Mk3L
+print(fixT[14:21], sfe[14:21], pco2[14:21])  # HadGEM
+print(fixT[21:28], sfe[21:28], pco2[21:28])  # Mk3L-cold
+
 
 #%% make figure
 
@@ -151,7 +157,6 @@ plt.scatter(fixT[25],pco2[25], c=cmap(norm(sfe[24])), s=size3, marker='v', zorde
 plt.scatter(fixT[26],pco2[26], c=cmap(norm(sfe[25])), s=size4, marker='P', zorder=1, alpha=alf1, vmin=femin, vmax=femax, edgecolor='royalblue', linewidths=4.0, label='Glacial Fe flux')
 sc = plt.scatter(fixT[27],pco2[27], c=cmap(norm(sfe[26])), s=size3, marker='o', zorder=1, alpha=alf1, vmin=femin, vmax=femax, edgecolor='royalblue', linewidths=4.0)
 
-
 # create lines
 slopes=[];error=[]
 
@@ -182,6 +187,7 @@ print("one standard deviation = ", np.sqrt(np.diag(pcov)))
 slopes.append(popt[0]); error.append(np.sqrt(np.diag(pcov))[0])
 x = np.arange(40, 240.0, 0.5)
 plt.plot(x, func(x,popt[0],popt[1]),color='royalblue',alpha=1.0,zorder=0, linewidth=2.0)
+
 
 plt.text(63,279,r'Glacial Fe-induced $\Delta CO_2$', fontweight='bold', family='sans-serif', fontsize=15, color='k', ha='left', va='center', rotation=0)
 plt.plot((63,100),(277.75,277.75),'k')
@@ -217,12 +223,22 @@ plt.legend(handles=legend_elements, loc='upper right', frameon=False, fontsize=1
 
 plt.subplots_adjust(bottom=0.25, top=0.92, right=0.9)
 
+plt.text(165,295,r'r$^2$ values', fontweight='bold', family='sans-serif', fontsize=15, color='k', ha='left', va='center', rotation=0)
+plt.plot((165,198),(293.75,293.75),'k')
+plt.text(165,291,r'GFDL$^{warm}$ = %.2f $\pm$ %.2f'%(slopes[0], error[0]), fontweight='bold', family='sans-serif', fontsize=13, color='chocolate', ha='left', va='center', rotation=0)
+plt.text(165,288,r'Mk3L$^{mild}$ = %.2f $\pm$ %.2f'%(slopes[1], error[1]), fontweight='bold', family='sans-serif', fontsize=13, color='k', ha='left', va='center', rotation=0)
+plt.text(165,285,r'HadGEM$^{cool}$ = %.2f $\pm$ %.2f'%(slopes[2], error[2]), fontweight='bold', family='sans-serif', fontsize=13, color='dimgrey', ha='left', va='center', rotation=0)
+plt.text(165,282,r'Mk3L$^{cold}$ = %.2f $\pm$ %.2f'%(slopes[3], error[3]), fontweight='bold', family='sans-serif', fontsize=13, color='royalblue', ha='left', va='center', rotation=0)
+
+
+
 # colorbar
 cbax = fig.add_axes([0.125, 0.1, 0.775, 0.03])
 cbar = mpl.colorbar.ColorbarBase(cbax, cmap=cmap, norm=norm, boundaries=bounds, ticks=bounds, spacing='uniform', orientation='horizontal')
 #cbar = plt.colorbar(sc, cax=cbax, orientation='horizontal')
 cbar.ax.set_xlabel('global mean surface Fe ($\mu$mol m$^{-3}$)', family='sans-serif', fontsize=18)
 plt.xticks(bounds, bounds, family='sans-serif', fontsize=15)
+
 
 
 #%%
